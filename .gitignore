@@ -1,0 +1,5 @@
+.DS_Store
+*.jpeg
+*.jpg
+!logo.png
+!favicon.png
