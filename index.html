@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>W3Footprint — Secure Digital Solutions</title>
   <meta name="description" content="W3Footprint provides Android development, blockchain, AI integration, data analytics, and cybersecurity services." />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -62,9 +65,9 @@
     }
     .logo-text span { color: var(--white); }
 
-    nav ul { list-style: none; display: flex; gap: 2.2rem; }
+    .nav-links { list-style: none; display: flex; gap: 2.2rem; align-items: center; }
 
-    nav ul a {
+    .nav-links a {
       color: var(--muted);
       text-decoration: none;
       font-size: 0.88rem;
@@ -73,7 +76,7 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
-    nav ul a:hover { color: var(--cyan); }
+    .nav-links a:hover { color: var(--cyan); }
 
     .nav-cta {
       background: transparent;
@@ -221,14 +224,59 @@
     /* SERVICES */
     #services { background: var(--navy2); }
 
+    .services-scroll-wrapper {
+      position: relative;
+    }
+
+    .services-scroll-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 80px;
+      background: linear-gradient(to right, transparent, var(--navy2));
+      pointer-events: none;
+      border-radius: 0 8px 8px 0;
+    }
+
     .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5px;
-      background: var(--border);
+      display: flex;
+      overflow-x: auto;
+      gap: 0;
       border: 1px solid var(--border);
       border-radius: 8px;
-      overflow: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 2px;
+    }
+
+    .services-grid::-webkit-scrollbar { display: none; }
+
+    .service-card {
+      flex: 0 0 300px;
+      border-right: 1px solid var(--border);
+    }
+
+    .service-card:first-child { border-radius: 8px 0 0 8px; }
+    .service-card:last-child  { border-right: none; border-radius: 0 8px 8px 0; }
+
+    .scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+      padding-left: 2px;
+    }
+
+    .scroll-hint::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 1px;
+      background: var(--muted);
     }
 
     .service-card {
@@ -273,6 +321,87 @@
       padding: 0.2rem 0.6rem;
       border-radius: 2px;
     }
+
+    /* PRODUCTS */
+    #products { background: var(--navy); }
+
+    .product-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3rem;
+      background: var(--navy2);
+      max-width: 900px;
+    }
+
+    .product-badge {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--cyan);
+      padding: 0.22rem 0.7rem;
+      border-radius: 2px;
+      margin-bottom: 1.2rem;
+    }
+
+    .product-card h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+    }
+
+    .product-card .tagline {
+      font-size: 0.95rem;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .product-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .product-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+    }
+
+    .product-visual {
+      background: var(--navy3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--cyan);
+      line-height: 2;
+    }
+
+    .product-visual .comment { color: var(--muted); }
 
     /* ABOUT */
     #about {
@@ -411,11 +540,19 @@
       line-height: 1.9;
     }
 
+    .footer-meta a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-meta a:hover { color: var(--cyan); }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      nav ul { display: none; }
+      .nav-links li:not(:last-child) { display: none; }
       #about { grid-template-columns: 1fr; gap: 3rem; }
       .about-visual { height: 280px; }
+      .product-card { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
       footer { flex-direction: column; text-align: center; }
       .footer-meta { text-align: center; }
     }
@@ -440,11 +577,12 @@
 <!-- NAV -->
 <nav>
   <a href="#hero" class="logo">
-    <img src="logo.png" alt="W3footprint logo" />
+    <img src="logo.png" alt="W3Footprint logo" />
     <span class="logo-text">W3<span>footprint</span></span>
   </a>
-  <ul>
+  <ul class="nav-links">
     <li><a href="#services">Services</a></li>
+    <li><a href="#products">Products</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact" class="nav-cta">Get in touch</a></li>
   </ul>
@@ -458,7 +596,7 @@
     <p class="hero-eyebrow">Sweden-based · Est. 2025</p>
     <h1>Leave a <span class="accent">secure</span><br>digital footprint.</h1>
     <p class="hero-sub">
-      W3footprint is a distributed technology team building Android applications, blockchain systems, AI-powered products, and data solutions — with security engineered in from the start.
+      W3Footprint is a Sweden-based technology practice building Android applications, blockchain systems, AI-powered products, and data solutions — with security engineered in from the start.
     </p>
     <div class="hero-actions">
       <a href="#services" class="btn-primary">Explore services</a>
@@ -473,17 +611,18 @@
   <h2>Built for the modern web.<br>Secured for the future.</h2>
   <p class="section-intro">From native mobile apps to decentralized systems and business intelligence — every solution is engineered with performance, security, and longevity in mind.</p>
 
+  <div class="services-scroll-wrapper">
   <div class="services-grid">
     <div class="service-card">
       <span class="service-number">01</span>
       <h3>Android Development</h3>
-      <p>Native Android applications built with Kotlin and Jetpack Compose, as well as Java/XML for legacy systems. Clean architecture, smooth UX, production-ready code.</p>
-      <span class="service-tag">Kotlin · Java · Jetpack Compose</span>
+      <p>Native Android applications built with Kotlin and Jetpack Compose. Clean architecture, smooth UX, production-ready code — built to ship on Google Play.</p>
+      <span class="service-tag">Kotlin · Jetpack Compose · Firebase</span>
     </div>
     <div class="service-card">
       <span class="service-number">02</span>
       <h3>Blockchain & Web3</h3>
-      <p>Solidity smart contracts developed on the Brownie framework, decentralized applications, and full Web3 integrations. Transparent and trustless by design.</p>
+      <p>Solidity smart contracts, decentralized applications, and full Web3 integrations. Transparent and trustless by design.</p>
       <span class="service-tag">Solidity · Brownie · Web3 · DApps</span>
     </div>
     <div class="service-card">
@@ -495,7 +634,7 @@
     <div class="service-card">
       <span class="service-number">04</span>
       <h3>Data Analytics</h3>
-      <p>Business intelligence, interactive dashboards, and data visualization that turn raw data into clear decisions. Built with Python and Power BI.</p>
+      <p>Business intelligence, interactive dashboards, and data visualization that turn raw data into clear decisions.</p>
       <span class="service-tag">Power BI · Python · BI · Reporting</span>
     </div>
     <div class="service-card">
@@ -503,6 +642,41 @@
       <h3>Cybersecurity</h3>
       <p>Security audits, vulnerability assessments, and hardening of digital systems. Your digital footprint — identified, assessed, and protected.</p>
       <span class="service-tag">Audits · Pentesting · Hardening</span>
+    </div>
+  </div>
+  </div>
+  <p class="scroll-hint">Scroll to explore</p>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <p class="section-label">Products</p>
+  <h2>Built and shipped.</h2>
+  <p class="section-intro">Alongside client work, W3Footprint builds its own products — real tools used by real people.</p>
+
+  <div class="product-card">
+    <div>
+      <span class="product-badge">Android · Live</span>
+      <h3>KörLog</h3>
+      <p class="tagline">Your time, your earnings, your way.</p>
+      <p>A professional hour and earnings tracker for Swedish taxi and rideshare drivers. Session timer with break tracking, real-time cloud sync across devices, weekly and monthly summaries, and adjustable personal targets.</p>
+      <div class="product-tags">
+        <span class="product-tag">Kotlin</span>
+        <span class="product-tag">Jetpack Compose</span>
+        <span class="product-tag">Firebase</span>
+        <span class="product-tag">Room</span>
+        <span class="product-tag">MVVM</span>
+      </div>
+    </div>
+    <div class="product-visual">
+      <div class="comment">// KörLog v1.0</div>
+      <div>&gt; platform: <span style="color:var(--white)">Android</span></div>
+      <div>&gt; market: <span style="color:var(--white)">Sweden</span></div>
+      <div>&gt; sync: <span style="color:#4ade80">real-time</span></div>
+      <div>&gt; offline: <span style="color:#4ade80">yes</span></div>
+      <div>&gt; privacy: <span style="color:#4ade80">GDPR compliant</span></div>
+      <div>&gt; status: <span style="color:#4ade80">live</span></div>
+      <div style="margin-top:0.8rem">&gt; <span class="blink">_</span></div>
     </div>
   </div>
 </section>
@@ -515,22 +689,22 @@
       <div>&gt; location: <span style="color:var(--white)">Stockholm, Sweden</span></div>
       <div>&gt; entity: <span style="color:var(--white)">Enskild firma</span></div>
       <div>&gt; services: <span style="color:var(--white)">5 active</span></div>
-      <div>&gt; team: <span style="color:var(--white)">distributed · remote</span></div>
+      <div>&gt; products: <span style="color:var(--white)">KörLog</span></div>
       <div>&gt; status: <span style="color:#4ade80">operational</span></div>
       <div>&gt; security: <span style="color:#4ade80">enabled</span></div>
       <div style="margin-top:0.8rem">&gt; <span class="blink">_</span></div>
     </div>
     <div class="about-box stat">
-      <span class="stat-number">5</span>
-      <span class="stat-label">Core services</span>
+      <span class="stat-number">5+</span>
+      <span class="stat-label">Services offered</span>
     </div>
   </div>
 
   <div class="about-text">
     <p class="section-label">About</p>
-    <h2>Distributed team.<br>Serious craft.</h2>
-    <p>W3footprint is a Sweden-registered technology practice built around a <strong>distributed team of developers and data specialists</strong> — covering mobile, blockchain, AI, analytics, and security.</p>
-    <p>Every project is approached with an engineer's precision and a security mindset. We build things that perform, scale, and can be trusted.</p>
+    <h2>One practice.<br>Serious craft.</h2>
+    <p>W3Footprint is a Sweden-registered technology practice covering <strong>mobile development, blockchain, AI, analytics, and security</strong> — operated as an enskild firma.</p>
+    <p>Every project is approached with an engineer's precision and a security mindset. Built to perform, scale, and be trusted.</p>
     <p>Based in Sweden. Working remotely with clients worldwide.</p>
     <p class="about-note">
       Registered in Sweden · F-skatt · VAT registered<br>
@@ -554,10 +728,11 @@
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-logo">W3footprint</span>
+  <span class="footer-logo">W3Footprint</span>
   <div class="footer-meta">
-    <div>© 2025 W3footprint · Registered in Sweden</div>
+    <div>© 2025 W3Footprint · Registered in Sweden</div>
     <div>Stockholm, Sweden · hello@w3footprint.se</div>
+    <div><a href="/korlog/privacy">Privacy Policy — KörLog</a></div>
   </div>
 </footer>
 
