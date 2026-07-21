@@ -81,6 +81,13 @@
       height: 34px;
       width: auto;
     }
+    /* Show the navy-outline logo in light mode, the white/teal one in dark mode */
+    .logo-img-dark { display: none; }
+    .logo-img-light { display: block; }
+    @media (prefers-color-scheme: dark) {
+      .logo-img-dark { display: block; }
+      .logo-img-light { display: none; }
+    }
     .logo-text {
       font-size: 1.1rem;
       font-weight: 800;
@@ -654,7 +661,8 @@
 <!-- NAV -->
 <nav>
   <a href="#hero" class="logo">
-    <img src="logo.png" alt="W3Footprint logo" />
+    <img src="logo.png" class="logo-img logo-img-dark" alt="W3Footprint logo" />
+    <img src="logo-light.png" class="logo-img logo-img-light" alt="W3Footprint logo" />
     <span class="logo-text">W3<span>footprint</span></span>
   </a>
   <ul class="nav-links">
