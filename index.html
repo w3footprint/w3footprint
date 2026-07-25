@@ -58,7 +58,6 @@
       font-size: 16px;
       line-height: 1.7;
       overflow-x: hidden;
-      transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* NAV */
@@ -67,7 +66,8 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.1rem 6%;
       background: var(--nav-bg);
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
     }
 
@@ -265,14 +265,13 @@
     /* SCROLL REVEAL — content slides up + fades in as the section enters view */
     .reveal {
       opacity: 0;
-      transform: translateY(48px);
+      transform: translateY(32px);
       transition:
-        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
       transition-delay: var(--reveal-delay, 0s);
-      will-change: opacity, transform;
     }
-    .reveal.in { opacity: 1; transform: none; }
+    .reveal.in { opacity: 1; transform: none; will-change: auto; }
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
     }
@@ -913,7 +912,7 @@
       const ny = (e.clientY / window.innerHeight) * 2 - 1;
       targetRotY = nx * 0.4;
       targetRotX = ny * 0.25;
-    });
+    }, { passive: true });
 
     function createGlassScene(canvas, opts) {
       const section = canvas.closest('section');
@@ -924,9 +923,9 @@
       const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
       camera.position.z = opts.cameraZ || 8;
 
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true });
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'low-power' });
       renderer.setClearColor(0x000000, 0);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.setSize(width, height, false);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -938,11 +937,9 @@
       group.position.set(opts.position[0], opts.position[1], opts.position[2] || 0);
       scene.add(group);
 
-      const material = new THREE.MeshPhysicalMaterial({
-        color: 0xffffff, metalness: 0, roughness: 0.15,
-        transmission: 0.55, thickness: 1.5,
-        iridescence: 1, iridescenceIOR: 1.3, iridescenceThicknessRange: [100, 400],
-        clearcoat: 1, clearcoatRoughness: 0.1, flatShading: true, envMapIntensity: 1.2
+      const material = new THREE.MeshStandardMaterial({
+        color: 0xffffff, metalness: 0.1, roughness: 0.2,
+        flatShading: true, envMapIntensity: 1.0
       });
       const mesh = new THREE.Mesh(opts.geometry(), material);
       group.add(mesh);
@@ -958,15 +955,13 @@
 
       function applyTheme(isDark) {
         if (isDark) {
-          material.color.set(0x0f1c33);
-          ambient.intensity = 0.25; keyLight.intensity = 50;
-          rimLight.color.set(0x3b82f6); rimLight.intensity = 65;
-          renderer.toneMappingExposure = 1.25;
+          material.color.set(0x1e3a5f);
+          ambient.intensity = 0.3; keyLight.intensity = 40;
+          rimLight.color.set(0x3b82f6); rimLight.intensity = 50;
         } else {
-          material.color.set(0xffffff);
-          ambient.intensity = 0.55; keyLight.intensity = 70;
-          rimLight.color.set(0x2563eb); rimLight.intensity = 30;
-          renderer.toneMappingExposure = 1.0;
+          material.color.set(0xdde8f8);
+          ambient.intensity = 0.6; keyLight.intensity = 60;
+          rimLight.color.set(0x2563eb); rimLight.intensity = 25;
         }
       }
       applyTheme(themeMedia.matches);
@@ -979,19 +974,15 @@
 
       let rafId = null, autoRot = 0, curX = 0, curY = 0;
       const spin = opts.spin != null ? opts.spin : 0.0015;
-      const scrollFactor = opts.scrollFactor != null ? opts.scrollFactor : 0;
 
       function frame() {
         autoRot += spin;
-        // rotation contribution from the section's position in the viewport
-        const rectTop = section.getBoundingClientRect().top;
-        const scrollRot = (rectTop / window.innerHeight) * scrollFactor;
         if (opts.tiltWithMouse) {
           curX += (targetRotX - curX) * 0.05;
           curY += (targetRotY - curY) * 0.05;
         }
-        group.rotation.x = curX + scrollRot * 0.3;
-        group.rotation.y = autoRot + curY + scrollRot;
+        group.rotation.x = curX;
+        group.rotation.y = autoRot + curY;
         renderer.render(scene, camera);
       }
 
@@ -1009,10 +1000,10 @@
     }
 
     const defs = [
-      { id: 'hero-canvas',     geometry: () => new THREE.IcosahedronGeometry(2.5, 0),  position: [1.7, -0.3, 0], tiltWithMouse: true, spin: 0.0015, scrollFactor: 0 },
-      { id: 'services-canvas', geometry: () => new THREE.OctahedronGeometry(3.0, 0),   position: [3.0, 0.3, -1], spin: 0.001,  scrollFactor: 0.8 },
-      { id: 'products-canvas', geometry: () => new THREE.DodecahedronGeometry(2.8, 0), position: [-3.0, 0.3, -1], spin: 0.0012, scrollFactor: 0.8 },
-      { id: 'contact-canvas',  geometry: () => new THREE.IcosahedronGeometry(1.6, 0),  position: [3.2, 1.0, 0], spin: 0.0018, scrollFactor: 0.6 }
+      { id: 'hero-canvas',     geometry: () => new THREE.IcosahedronGeometry(2.5, 0),  position: [1.7, -0.3, 0], tiltWithMouse: true, spin: 0.0015 },
+      { id: 'services-canvas', geometry: () => new THREE.OctahedronGeometry(3.0, 0),   position: [3.0, 0.3, -1], spin: 0.001 },
+      { id: 'products-canvas', geometry: () => new THREE.DodecahedronGeometry(2.8, 0), position: [-3.0, 0.3, -1], spin: 0.0012 },
+      { id: 'contact-canvas',  geometry: () => new THREE.IcosahedronGeometry(1.6, 0),  position: [3.2, 1.0, 0], spin: 0.0018 }
     ];
 
     const scenes = [];
@@ -1062,13 +1053,13 @@
       }
       resize();
 
-      for (let i = 0; i < 55; i++) {
+      for (let i = 0; i < 30; i++) {
         digits.push({
           x: Math.random() * w, y: Math.random() * h,
           ch: Math.random() < 0.5 ? '0' : '1',
-          sp: 0.2 + Math.random() * 0.7,
-          size: 10 + Math.random() * 9,
-          alpha: 0.1 + Math.random() * 0.35
+          sp: 0.2 + Math.random() * 0.5,
+          size: 11 + Math.random() * 7,
+          alpha: 0.1 + Math.random() * 0.3
         });
       }
       for (let i = 0; i < 4; i++) {
@@ -1098,7 +1089,7 @@
         digits.forEach((d) => {
           d.y -= d.sp;
           if (d.y < -12) { d.y = h + 12; d.x = Math.random() * w; d.ch = Math.random() < 0.5 ? '0' : '1'; }
-          ctx.font = `600 ${d.size}px "Space Mono", monospace`;
+          ctx.font = d._font || (d._font = `600 ${d.size}px "Space Mono", monospace`);
           ctx.fillStyle = dark ? `rgba(147,197,253,${d.alpha})` : `rgba(255,255,255,${d.alpha})`;
           ctx.fillText(d.ch, d.x, d.y);
         });
