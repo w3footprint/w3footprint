@@ -6,6 +6,16 @@
   function $(s, c) { return (c || d).querySelector(s); }
   function $$(s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); }
 
+  /* logo image inside every wordmark */
+  $$('.mark').forEach(function (m) {
+    if (m.querySelector('img')) return;
+    var im = d.createElement('img');
+    im.src = '/assets/logo.svg'; im.alt = ''; im.width = 28; im.height = 43;
+    var sp = d.createElement('span');
+    while (m.firstChild) sp.appendChild(m.firstChild);
+    m.appendChild(im); m.appendChild(sp);
+  });
+
   /* scroll progress, nav, back to top */
   var bar = $('#progress'), nav = $('#nav'), top = $('#totop');
   function onScroll() {

@@ -31,7 +31,8 @@ section { padding-block: clamp(4.5rem, 9vw, 8rem); }
 nav { position: fixed; inset: 0 0 auto 0; z-index: 90; transition: background .25s, border-color .25s, color .25s; border-bottom: 1px solid transparent; color: #fff; }
 nav.solid { background: rgba(255,255,255,.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-color: var(--line); color: var(--ink); }
 .nav-in { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 1.2rem; }
-.mark { display: inline-block; background: #000; color: #fff; font-weight: 700; font-size: 1.45rem; letter-spacing: -.02em; padding: .1rem .55rem .2rem; line-height: 1.25; flex: none; transition: transform .25s var(--e-out); }
+.mark { display: inline-flex; align-items: center; gap: .5rem; background: #000; color: #fff; font-weight: 700; font-size: 1.45rem; letter-spacing: -.02em; padding: .3rem .75rem .3rem .6rem; line-height: 1.25; flex: none; transition: transform .25s var(--e-out); }
+.mark img { height: 2.3rem; width: auto; display: block; }
 .mark:hover { transform: rotate(-2deg) scale(1.03); }
 .mark b { color: var(--lime); font-weight: 700; }
 nav.solid .mark { box-shadow: none; }
@@ -397,3 +398,4 @@ a.card { display: block; }
 @media (max-width: 1180px) { .nav-links { display: none; } .burger { display: block; } }
 @media (max-width: 960px) { .hero-split { grid-template-columns: 1fr; } .hero-art { aspect-ratio: 16 / 9; } .rels { grid-template-columns: 1fr 1fr; } .fgrid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .rels { grid-template-columns: 1fr; } .fgrid { grid-template-columns: 1fr; } }
+
