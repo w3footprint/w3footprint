@@ -464,3 +464,16 @@ body.menu-open nav .mark img { filter: none; }
 .posts .card.post .go { margin-top: auto !important; padding-top: 1.2rem; }
 .card.post[hidden], .post-feature[hidden] { display: none; }
 @media (max-width: 960px) { .posts.g3 { grid-template-columns: 1fr; } }
+
+/* wordmark: W white, 3 green, footprint yellow; darker tones on the white bar */
+.mark { color: var(--lime); }
+.mark b i { font-style: normal; }
+.mark b .w { color: #fff; }
+.mark b .t { color: #2fd67a; }
+nav.solid .mark { color: #a68a00; }
+nav.solid .mark b .w { color: #0b0b0b; }
+nav.solid .mark b .t { color: #14884a; }
+body.menu-open nav .mark { color: var(--lime); }
+body.menu-open nav .mark b .w { color: #fff; }
+body.menu-open nav .mark b .t { color: #2fd67a; }
+footer .mark { color: var(--lime); }
