@@ -478,3 +478,6 @@ footer .mark { color: var(--lime); }
 nav.solid .mark { color: #a68a00; }
 /* icon gold on the white bar, matching the wordmark */
 nav.solid .mark img { filter: brightness(.58) hue-rotate(-22deg) saturate(1.8); }
+/* gold logo file on the white bar (foot outline matches "footprint") */
+nav.solid .mark img { filter: none; content: url(/assets/logo-gold.svg); }
+body.menu-open nav .mark img { content: url(/assets/logo.svg); }
