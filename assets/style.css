@@ -481,3 +481,6 @@ nav.solid .mark img { filter: brightness(.58) hue-rotate(-22deg) saturate(1.8); 
 /* gold logo file on the white bar (foot outline matches "footprint") */
 nav.solid .mark img { filter: none; content: url(/assets/logo-gold.svg); }
 body.menu-open nav .mark img { content: url(/assets/logo.svg); }
+/* preloader wordmark: white W, green 3, yellow footprint */
+#pre .pre-mark { color: var(--lime); }
+#pre .pre-mark b { background: linear-gradient(90deg, #fff 0, #fff .959em, #2fd67a .959em); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
