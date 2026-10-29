@@ -232,3 +232,32 @@
   w.addEventListener('resize', onScroll);
   onScroll();
 })();
+
+/* blog: filters, copy link, and a Blog link on pages built before the blog existed */
+(function () {
+  var d = document;
+  try {
+    if (!d.querySelector('.nav-links a[href$="/blog/"]')) {
+      var rev = d.querySelector('.nav-links a[href$="/reviews/"]');
+      if (rev && rev.parentNode) { var li = d.createElement('li'); li.innerHTML = '<a href="/blog/">Blog</a>'; rev.parentNode.parentNode.insertBefore(li, rev.parentNode.nextSibling); }
+      var dr = d.querySelector('.drawer a[href$="/reviews/"]');
+      if (dr) { var x = d.createElement('a'); x.href = '/blog/'; x.textContent = 'Blog'; dr.parentNode.insertBefore(x, dr.nextSibling); }
+      var fg = d.querySelector('footer a[href$="/guides/"]');
+      if (fg && fg.parentNode) { var fl = d.createElement('li'); fl.innerHTML = '<a href="/blog/">Blog</a>'; fg.parentNode.parentNode.insertBefore(fl, fg.parentNode); }
+    }
+    var f = d.querySelector('[data-blog-filters]');
+    if (f) f.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      f.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      var c = b.getAttribute('data-c');
+      d.querySelectorAll('[data-c].card, [data-c].post-feature').forEach(function (n) { n.hidden = !(c === 'all' || n.getAttribute('data-c') === c); });
+    });
+    d.querySelectorAll('[data-copy]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var u = b.getAttribute('data-copy');
+        if (navigator.clipboard) navigator.clipboard.writeText(u).then(function () { b.textContent = 'Copied'; }, function () { b.textContent = u; });
+        else b.textContent = u;
+      });
+    });
+  } catch (e) {}
+})();
