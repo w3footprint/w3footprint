@@ -474,3 +474,5 @@ nav.solid .mark b .w { color: #0b0b0b; }
 body.menu-open nav .mark { color: var(--lime); }
 body.menu-open nav .mark b .w { color: #fff; }
 footer .mark { color: var(--lime); }
+/* footprint: dark gold on the white bar */
+nav.solid .mark { color: #a68a00; }
