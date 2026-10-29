@@ -261,3 +261,12 @@
     });
   } catch (e) {}
 })();
+
+/* wordmark: split W3 so W and 3 can take separate colours */
+(function () {
+  try {
+    document.querySelectorAll('.mark b').forEach(function (b) {
+      if (b.textContent === 'W3' && !b.querySelector('i')) b.innerHTML = '<i class="w">W</i><i class="t">3</i>';
+    });
+  } catch (e) {}
+})();
