@@ -432,3 +432,35 @@ body.menu-open nav .mark { background: transparent; color: #fff; }
 body.menu-open nav .mark b { color: var(--brand-teal); }
 footer .mark { color: #fff; }
 @media (max-width: 600px) { .mark img { height: 2.1rem; } .mark { font-size: 1.3rem; } }
+
+
+/* foot icon keeps its original lime on the dark bar; deepened on the white bar so it stays visible */
+nav.solid .mark img { filter: brightness(.5) saturate(1.5); }
+body.menu-open nav .mark img { filter: none; }
+
+/* ===== blog ===== */
+.post-wrap { max-width: 46rem; margin-inline: auto; }
+.post-meta { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; font-size: .85rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.post-meta span:first-child { color: var(--green-deep); }
+.toc { margin-top: 1.8rem; padding: 1.3rem 1.5rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--bg2, #f6f6f4); }
+.toc ol { margin: .7rem 0 0 1.2rem; display: grid; gap: .4rem; color: var(--ink-2); font-weight: 600; }
+.toc a { color: inherit; text-decoration: none; } .toc a:hover { color: var(--green-deep); text-decoration: underline; }
+.post-wrap .article { max-width: none; margin-top: 2rem; font-size: 1.08rem; line-height: 1.75; }
+.post-wrap .article h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); margin-top: 2.8rem; scroll-margin-top: 100px; }
+.post-wrap .article p { margin-top: 1.1rem; }
+.post-wrap .article ul { margin-top: 1.1rem; }
+.post-wrap .article code { background: #f0f0ec; padding: .1em .4em; border-radius: 6px; font-size: .92em; }
+.share { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--line); font-weight: 700; }
+.share span { color: var(--muted); font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; }
+.share a, .share button { padding: .5rem 1.1rem; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--ink); font: inherit; font-size: .9rem; cursor: pointer; text-decoration: none; }
+.share a:hover, .share button:hover { border-color: #000; }
+.post-feature { display: block; padding: clamp(1.6rem, 4vw, 3rem); border-radius: var(--r-lg); background: #000; color: #fff; text-decoration: none; transition: transform .3s var(--e-out); }
+.post-feature:hover { transform: translateY(-3px); }
+.post-feature .num { color: var(--lime); font-size: .8rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.post-feature h2 { margin-top: .8rem; font-size: clamp(1.7rem, 4.4vw, 2.8rem); max-width: 24ch; }
+.post-feature p { margin-top: 1rem; color: var(--on-dark-muted); max-width: 40rem; }
+.post-feature .go { margin-top: 1.4rem; display: inline-flex; gap: .5rem; color: var(--lime); font-weight: 800; }
+.posts .card.post { display: flex; flex-direction: column; }
+.posts .card.post .go { margin-top: auto !important; padding-top: 1.2rem; }
+.card.post[hidden], .post-feature[hidden] { display: none; }
+@media (max-width: 960px) { .posts.g3 { grid-template-columns: 1fr; } }
