@@ -476,3 +476,5 @@ body.menu-open nav .mark b .w { color: #fff; }
 footer .mark { color: var(--lime); }
 /* footprint: dark gold on the white bar */
 nav.solid .mark { color: #a68a00; }
+/* icon gold on the white bar, matching the wordmark */
+nav.solid .mark img { filter: brightness(.58) hue-rotate(-22deg) saturate(1.8); }
