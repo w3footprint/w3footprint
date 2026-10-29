@@ -270,3 +270,12 @@
     });
   } catch (e) {}
 })();
+
+/* footer: no location line */
+(function () {
+  try {
+    document.querySelectorAll('.fabout p').forEach(function (p) {
+      if (p.textContent.indexOf('under one roof. Stockholm, Sweden.') > -1) p.textContent = p.textContent.replace(' Stockholm, Sweden.', '');
+    });
+  } catch (e) {}
+})();
