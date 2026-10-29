@@ -419,3 +419,16 @@ img, svg, video, canvas { max-width: 100%; }
   .mark img { height: 2rem; }
   section, .sect { padding-block: clamp(3rem, 12vw, 4.5rem); }
 }
+
+
+/* ===== wordmark: transparent, adapts to bar; brand teal W3 ===== */
+:root { --brand-teal: #38b5a5; --brand-teal-deep: #1f9a89; }
+.mark { background: transparent; color: inherit; padding: 0; gap: .55rem; }
+.mark:hover { transform: none; }
+.mark img { height: 2.4rem; }
+.mark b { color: var(--brand-teal); }
+nav.solid .mark b { color: var(--brand-teal-deep); }
+body.menu-open nav .mark { background: transparent; color: #fff; }
+body.menu-open nav .mark b { color: var(--brand-teal); }
+footer .mark { color: #fff; }
+@media (max-width: 600px) { .mark img { height: 2.1rem; } .mark { font-size: 1.3rem; } }
